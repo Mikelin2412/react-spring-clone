@@ -1,4 +1,4 @@
-const TablesInfo = [
+export const TablesInfo = [
   {
     title: 'Spring Boot',
     imageSrc: './assets/spring-boot.svg',
@@ -43,7 +43,7 @@ const TablesInfo = [
   },
 ];
 
-const NavigationMenuItems = [
+export const NavigationMenuItems = [
   {
     title: 'Why Spring',
     items: [
