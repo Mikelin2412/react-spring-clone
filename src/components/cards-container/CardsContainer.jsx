@@ -8,6 +8,7 @@ const CardsContainer = () => {
     <div className={styles.cardsContainer}>
       {TablesInfo.map((cardInfo) => (
         <Card
+          key={cardInfo.title}
           title={cardInfo.title}
           imageSrc={cardInfo.imageSrc}
           description={cardInfo.description}
