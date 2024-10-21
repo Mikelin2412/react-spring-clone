@@ -1,0 +1,11 @@
+.itemLink {
+  display: block;
+  color: #98afae;
+  font-size: 1.2rem;
+  padding: 0.2rem 0;
+  cursor: pointer;
+}
+
+.itemLink:hover {
+  color: #6db33f;
+}
