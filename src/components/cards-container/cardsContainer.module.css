@@ -9,3 +9,15 @@
 .noResultText {
   margin: auto;
 }
+
+@media screen and (width >= 800px) and (width <= 1000px) {
+  .cardsContainer {
+    width: 92.5%;
+  }
+}
+
+@media screen and (width < 800px) {
+  .cardsContainer {
+    flex-direction: column;
+  }
+}
