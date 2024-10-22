@@ -22,3 +22,7 @@
   transition: transform 0.2s ease-out;
   width: 15px;
 }
+
+.title.open::after {
+  transform: rotate(45deg) translate(5px, 15px) scale(-1);
+}

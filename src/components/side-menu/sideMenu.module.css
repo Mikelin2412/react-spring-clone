@@ -1,6 +1,6 @@
 .sideMenu {
   position: fixed;
-  top: 0;
+  top: -100%;
   left: 0;
   z-index: 1;
   width: 100%;
@@ -13,4 +13,10 @@
 
 .itemsContainer {
   padding: 3rem 3.5rem;
+}
+
+@media screen and (width <= 950px) {
+  .sideMenu.active {
+    top: 0;
+  }
 }

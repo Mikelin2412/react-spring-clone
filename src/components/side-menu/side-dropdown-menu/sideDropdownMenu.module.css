@@ -1,3 +1,7 @@
 .dropdownList {
+  display: none;
+}
+
+.dropdownList.active {
   display: block;
 }
