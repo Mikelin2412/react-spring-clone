@@ -1,0 +1,15 @@
+.header {
+  border-bottom: 1px solid #ebf2f2;
+  display: flex;
+  justify-content: center;
+}
+
+.navBar {
+  margin: 0 20px;
+  padding: 5px 0;
+  max-width: 1344px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

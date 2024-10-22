@@ -1,5 +1,14 @@
-function HomePage() {
-  return <h1>Spring Clone</h1>;
-}
+import React from 'react';
+import Header from '../components/header/Header';
+import MainContent from '../components/main-content/MainContent';
+
+const HomePage = () => {
+  return (
+    <>
+      <Header />
+      <MainContent />
+    </>
+  );
+};
 
 export default HomePage;

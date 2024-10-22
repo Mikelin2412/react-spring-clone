@@ -1,0 +1,25 @@
+.projectSection {
+  margin: 3rem auto;
+  max-width: 1344px;
+}
+
+@media screen and (width <= 1384px) {
+  .projectSection {
+    margin: 3rem 20px;
+  }
+}
+
+.title {
+  padding-top: 40px;
+  font-family: 'Metropolis', sans-serif;
+  font-size: 3.5rem;
+}
+
+.description {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 2.2rem;
+  max-width: 960px;
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,10 @@
+.dropdownItemLink {
+  padding: 0.5rem 0.75rem;
+  line-height: 1.5;
+  display: block;
+  white-space: nowrap;
+}
+
+.dropdownItemLink:hover {
+  color: #6db33f;
+}
