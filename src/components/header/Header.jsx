@@ -7,7 +7,7 @@ import styles from './header.module.css';
 
 const Header = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  
+
   useEffect(() => {
     document.body.style.overflow = isSideMenuOpen ? 'hidden' : 'auto';
   }, [isSideMenuOpen]);

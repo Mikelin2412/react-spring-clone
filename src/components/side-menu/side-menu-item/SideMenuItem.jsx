@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SideDropdownMenu from '../side-dropdown-menu/SideDropdownMenu';
 import styles from './sideMenuItem.module.css';
 import classNames from 'classnames';

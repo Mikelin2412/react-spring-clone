@@ -1,5 +1,5 @@
 import React from 'react';
-import DropdownMenuItem from '../dropdown-menu-item/DropdownMenuItem';
+import DropdownMenuItem from './dropdown-menu-item/DropdownMenuItem';
 import styles from './dropdownMenu.module.css';
 import classNames from 'classnames';
 

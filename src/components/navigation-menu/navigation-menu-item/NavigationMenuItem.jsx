@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './navigationItem.module.css';
-import DropdownMenu from '../dropdown-menu/DropdownMenu';
+import DropdownMenu from '../../dropdown-menu/DropdownMenu';
 
 const NavigationMenuItem = ({ title, items }) => {
   const [isHovered, setIsHovered] = useState(false);
