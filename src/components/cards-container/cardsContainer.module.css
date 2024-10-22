@@ -1,0 +1,23 @@
+.cardsContainer {
+  margin: 0 auto;
+  width: 82.5%;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.noResultText {
+  margin: auto;
+}
+
+@media screen and (width >= 800px) and (width <= 1000px) {
+  .cardsContainer {
+    width: 92.5%;
+  }
+}
+
+@media screen and (width < 800px) {
+  .cardsContainer {
+    flex-direction: column;
+  }
+}

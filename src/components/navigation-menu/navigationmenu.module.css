@@ -1,0 +1,10 @@
+.navigationMenu {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (width <= 950px) {
+  .navigationMenu {
+    display: none;
+  }
+}
