@@ -8,10 +8,7 @@ const BurgerMenuButton = ({ isOpen, handleClick }) => {
   });
 
   return (
-    <div
-      className={buttonClassName}
-      onClick={() => handleClick(!isOpen)}
-    >
+    <div className={buttonClassName} onClick={() => handleClick(!isOpen)}>
       <span></span>
       <span></span>
       <span></span>

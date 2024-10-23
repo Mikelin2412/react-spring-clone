@@ -7,7 +7,10 @@ import useDebounce from '../../hooks/useDebounce';
 
 const SpringPossibilitiesSection = () => {
   const [inputValue, setInputValue] = useState('');
-  const searchSuitableCards = useDebounce((e) => setInputValue(e.target.value), 300);
+  const searchSuitableCards = useDebounce(
+    (e) => setInputValue(e.target.value),
+    300,
+  );
 
   return (
     <section className={styles.springPossibilitiesSection}>
