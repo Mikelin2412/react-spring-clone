@@ -1,4 +1,5 @@
 import React from 'react';
+import springLogo from '../../assets/spring-framework-logo.png';
 import styles from './logo.module.css';
 
 const Logo = () => {
@@ -6,7 +7,7 @@ const Logo = () => {
     <a href="/">
       <img
         className={styles.logo}
-        src="/src/assets/spring-framework-logo.png"
+        src={springLogo}
         alt="spring-framework-logo"
       />
     </a>
