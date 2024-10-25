@@ -61,6 +61,12 @@
   transition: background-color 0.3s;
 }
 
-button:hover {
+.button:hover {
   background-color: #57a033;
+}
+
+.warningMessage {
+  margin-top: 10px;
+  text-align: center;
+  color: red;
 }
