@@ -4,8 +4,10 @@ import NavigationMenu from '../navigation-menu/NavigationMenu';
 import BurgerMenuButton from '../burger-menu-button/BurgerMenuButton';
 import SideMenu from '../side-menu/SideMenu';
 import styles from './header.module.css';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const isAuth = useSelector((state) => state.authorization);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -16,12 +18,16 @@ const Header = () => {
     <header className={styles.header}>
       <nav className={styles.navBar}>
         <Logo />
-        <NavigationMenu />
-        <BurgerMenuButton
-          handleClick={setIsSideMenuOpen}
-          isOpen={isSideMenuOpen}
-        />
-        <SideMenu isOpen={isSideMenuOpen} />
+        {isAuth && (
+          <>
+            <NavigationMenu />
+            <BurgerMenuButton
+              handleClick={setIsSideMenuOpen}
+              isOpen={isSideMenuOpen}
+            />
+            <SideMenu isOpen={isSideMenuOpen} />
+          </>
+        )}
       </nav>
     </header>
   );
