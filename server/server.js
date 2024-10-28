@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { KEYS, ProjectsInfo } = require('./mock-data');
 const app = express();
 const port = 3000;
 
@@ -13,18 +14,24 @@ app.use(
 );
 app.use(express.json());
 
-app.get('/getAllProjects', (req, res) => {
-  res.send('get all projects');
-});
+app.get('/getProjects', (req, res) => {
+  const { search } = req.query;
 
-app.get('/searchProject', (req, res) => {
-  res.send('search projects');
+  if (!search) {
+    res.send(ProjectsInfo);
+  } else {
+    const suitableProjects = ProjectsInfo.filter((project) =>
+      project.title.toLowerCase().includes(search.toLowerCase()),
+    );
+    res.send(suitableProjects);
+  }
 });
 
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
-  let isAuth = username === 'admin' && password === '1234' ? true : false;
-  res.json({ username, password, isAuth });
+  let isAuth =
+    username === KEYS.username && password === KEYS.password ? true : false;
+  res.send({ username, password, isAuth });
 });
 
 app.listen(port, () => {
