@@ -18,20 +18,26 @@ app.get('/getProjects', (req, res) => {
   const { search } = req.query;
 
   if (!search) {
-    res.send(ProjectsInfo);
-  } else {
-    const suitableProjects = ProjectsInfo.filter((project) =>
-      project.title.toLowerCase().includes(search.toLowerCase()),
-    );
-    res.send(suitableProjects);
+    return res.send(ProjectsInfo);
   }
+
+  const suitableProjects = ProjectsInfo.filter((project) =>
+    project.title.toLowerCase().includes(search.toLowerCase()),
+  );
+
+  return res.send(suitableProjects);
 });
 
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   let isAuth =
     username === KEYS.username && password === KEYS.password ? true : false;
-  res.send({ username, password, isAuth });
+
+  if (!isAuth) {
+    return res.status(401).json({ message: "You don't have access!" });
+  }
+
+  return res.send({ username, password, isAuth });
 });
 
 app.listen(port, () => {
