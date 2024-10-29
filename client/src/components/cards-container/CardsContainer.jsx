@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styles from './cardsContainer.module.css';
-import { TablesInfo } from '../../constants/constants';
 import Card from '../card/Card';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProjects } from '../../store/projects/projectActions';
 
 const CardsContainer = ({ searchInputValue }) => {
-  const [suitableCards, setSuitableCards] = useState(TablesInfo);
+  const dispatch = useDispatch();
+  const suitableProjects = useSelector((state) => state.projects);
 
   useEffect(() => {
-    setSuitableCards(
-      TablesInfo.filter((item) =>
-        item.title.toLowerCase().includes(searchInputValue.toLowerCase()),
-      ),
-    );
+    dispatch(getProjects(searchInputValue));
   }, [searchInputValue]);
 
   return (
     <div className={styles.cardsContainer}>
-      {!suitableCards.length ? (
+      {!suitableProjects.length ? (
         <h2 className={styles.noResultText}>No results</h2>
       ) : (
-        suitableCards.map((cardInfo) => (
+        suitableProjects.map((cardInfo) => (
           <Card
             key={cardInfo.title}
             title={cardInfo.title}
