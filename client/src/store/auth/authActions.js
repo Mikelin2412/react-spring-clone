@@ -3,7 +3,7 @@ import axios from 'axios';
 const errorMessage = (message) => ({
   type: 'SET_ERROR_MESSAGE',
   payload: message,
-})
+});
 
 export const authUser = (username, password) => {
   return async (dispatch) => {
@@ -16,7 +16,7 @@ export const authUser = (username, password) => {
         dispatch(authorizeUser(res.data));
       })
       .catch((err) => {
-        dispatch(errorMessage(err.response.data))
+        dispatch(errorMessage(err.response.data));
       });
   };
 };

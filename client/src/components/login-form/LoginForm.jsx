@@ -14,7 +14,7 @@ const Form = () => {
 
   useEffect(() => {
     if (isAuth) {
-      navigate(HOME_ROUTE)
+      navigate(HOME_ROUTE);
     }
   }, [isAuth]);
 
@@ -44,7 +44,7 @@ const Form = () => {
         Login
       </button>
       {message ? (
-        <span className={styles.warningMessage}>You don't have access!</span>
+        <span className={styles.warningMessage}>{message}</span>
       ) : null}
     </form>
   );
