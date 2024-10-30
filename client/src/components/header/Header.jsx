@@ -7,7 +7,7 @@ import styles from './header.module.css';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const isAuth = useSelector((state) => state.authorization);
+  const { isAuth } = useSelector((state) => state.authorization);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   useEffect(() => {

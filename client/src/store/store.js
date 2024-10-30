@@ -13,7 +13,11 @@ export default function configureStore(preloadedState) {
   const middlewares = [loggerMiddleware, thunk];
   const middlewareEnhancer = applyMiddleware(...middlewares);
 
-  const enhancers = [middlewareEnhancer, monitorReducersEnhancer];
+  const enhancers = [
+    middlewareEnhancer,
+    monitorReducersEnhancer,
+    typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  ];
   const composedEnhancers = compose(...enhancers);
 
   const store = createStore(rootReducer, preloadedState, composedEnhancers);

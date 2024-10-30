@@ -5,7 +5,7 @@ import { AUTH_ROUTES, LOGIN_ROUTE, PUBLIC_ROUTES } from './routes';
 import Layout from '../layout';
 
 const AppRouter = () => {
-  const isAuth = useSelector((state) => state.authorization);
+  const { isAuth } = useSelector((state) => state.authorization);
   const navigate = useNavigate();
 
   useEffect(() => {

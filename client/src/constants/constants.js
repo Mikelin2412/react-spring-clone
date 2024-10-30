@@ -8,7 +8,7 @@ import springSecurity from '../assets/spring-security.svg';
 export const KEYS = {
   username: 'admin',
   password: '1234',
-}
+};
 
 export const TablesInfo = [
   {
