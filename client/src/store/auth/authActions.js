@@ -6,8 +6,8 @@ const errorMessage = (message) => ({
 })
 
 export const authUser = (username, password) => {
-  return (dispatch) => {
-    axios
+  return async (dispatch) => {
+    await axios
       .post(`http://localhost:3000/login`, {
         username,
         password,

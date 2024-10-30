@@ -6,8 +6,8 @@ const setProjectsBySearch = (projects) => ({
 });
 
 export const getProjects = (search) => {
-  return (dispatch) => {
-    axios
+  return async (dispatch) => {
+    await axios
       .get(`http://localhost:3000/getProjects`, {
         params: { search },
       })
