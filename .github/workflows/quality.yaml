@@ -1,10 +1,13 @@
 name: Code Quality checks
+
 on:
   pull_request:
     branches: [main]
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
+
 jobs:
   prettier-client:
     name: Prettier Client
@@ -17,9 +20,6 @@ jobs:
         node-version: [18]
     steps:
       - uses: actions/checkout@v3
-      - uses: npm/action-setup@v2
-        with:
-          version: 8
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: npm install -D
       - name: Check formatting with Prettier (Client)
-        run: npm prettier:check
+        run: npm run prettier:check
 
   prettier-server:
     name: Prettier (Server)
@@ -42,9 +42,6 @@ jobs:
         node-version: [18]
     steps:
       - uses: actions/checkout@v3
-      - uses: npm/action-setup@v2
-        with:
-          version: 8
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -54,7 +51,7 @@ jobs:
       - name: Install dependencies for Server
         run: npm install -D
       - name: Check formatting with Prettier (Server)
-        run: npm prettier:check
+        run: npm run prettier:check
 
   eslint-client:
     name: ESLint (Client)
@@ -67,9 +64,6 @@ jobs:
         node-version: [18]
     steps:
       - uses: actions/checkout@v3
-      - uses: npm/action-setup@v2
-        with:
-          version: 8
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -79,7 +73,7 @@ jobs:
       - name: Install dependencies for Client
         run: npm install -D
       - name: Run ESLint for Client
-        run: npm lint
+        run: npm run lint
 
   eslint-server:
     name: ESLint (Server)
@@ -92,9 +86,6 @@ jobs:
         node-version: [18]
     steps:
       - uses: actions/checkout@v3
-      - uses: npm/action-setup@v2
-        with:
-          version: 8
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -104,4 +95,4 @@ jobs:
       - name: Install dependencies for Server
         run: npm install -D
       - name: Run ESLint for Server
-        run: npm lint 
+        run: npm run lint 
