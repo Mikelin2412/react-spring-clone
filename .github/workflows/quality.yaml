@@ -1,98 +1,98 @@
 name: Code Quality checks
+
 on:
   pull_request:
     branches: [main]
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
+
 jobs:
   prettier-client:
     name: Prettier Client
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    defaults:
+       run:
+         working-directory: ./client/
     strategy:
       matrix:
         node-version: [18]
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          cache: "npm"
+          cache-dependency-path: './client/package-lock.json'
       - name: Install dependencies
-        working-directory: ./client
-        run: pnpm install -D
+        run: npm install -D
       - name: Check formatting with Prettier (Client)
-        run: pnpm prettier:check
+        run: npm run prettier:check
 
   prettier-server:
     name: Prettier (Server)
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    defaults:
+       run:
+         working-directory: ./server/
     strategy:
       matrix:
         node-version: [18]
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          cache: "npm"
+          cache-dependency-path: './server/package-lock.json'
       - name: Install dependencies for Server
-        working-directory: ./server
-        run: pnpm install -D
+        run: npm install -D
       - name: Check formatting with Prettier (Server)
-        working-directory: ./server
-        run: pnpm prettier:check
+        run: npm run prettier:check
 
   eslint-client:
     name: ESLint (Client)
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    defaults:
+       run:
+         working-directory: ./client/
     strategy:
       matrix:
         node-version: [18]
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          cache: "npm"
+          cache-dependency-path: './client/package-lock.json'
       - name: Install dependencies for Client
-        working-directory: ./client
-        run: pnpm install -D
+        run: npm install -D
       - name: Run ESLint for Client
-        working-directory: ./client
-        run: pnpm lint
+        run: npm run lint
 
   eslint-server:
     name: ESLint (Server)
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    defaults:
+       run:
+         working-directory: ./server/
     strategy:
       matrix:
         node-version: [18]
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          cache: "npm"
+          cache-dependency-path: './server/package-lock.json'
       - name: Install dependencies for Server
-        working-directory: ./server
-        run: pnpm install -D
+        run: npm install -D
       - name: Run ESLint for Server
-        working-directory: ./server
-        run: pnpm lint 
+        run: npm run lint 
