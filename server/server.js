@@ -2,8 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const sequelize = require('./db');
 const cors = require('cors');
-const { KEYS, ProjectsInfo } = require('./mock-data');
 const { User } = require('./models/user');
+const { Project } = require('./models/project');
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
 
@@ -17,18 +17,23 @@ app.use(
 );
 app.use(express.json());
 
-app.get('/getProjects', (req, res) => {
-  const { search } = req.query;
+app.get('/getProjects', async (req, res) => {
+  try {
+    const { search } = req.query;
+    const projects = await Project.findAll();
 
-  if (!search) {
-    return res.send(ProjectsInfo);
+    if (!search) {
+      return res.send(projects);
+    }
+
+    const suitableProjects = projects.filter((project) =>
+      project.title.toLowerCase().includes(search.toLowerCase()),
+    );
+
+    return res.send(suitableProjects);
+  } catch (e) {
+    return res.send({ error: e.message });
   }
-
-  const suitableProjects = ProjectsInfo.filter((project) =>
-    project.title.toLowerCase().includes(search.toLowerCase()),
-  );
-
-  return res.send(suitableProjects);
 });
 
 app.post('/login', async (req, res) => {
