@@ -3,6 +3,7 @@ const express = require('express');
 const sequelize = require('./db');
 const cors = require('cors');
 const { KEYS, ProjectsInfo } = require('./mock-data');
+const { User } = require('./models/user');
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
 
@@ -30,21 +31,28 @@ app.get('/getProjects', (req, res) => {
   return res.send(suitableProjects);
 });
 
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  let isAuth =
-    username === KEYS.username && password === KEYS.password ? true : false;
+app.post('/login', async (req, res) => {
+  try {
+    const { username, password, firstName, lastName, age } = req.body;
 
-  if (!isAuth) {
-    return res.status(401).json({ message: "You don't have access!" });
+    const user = await User.create({
+      username,
+      password,
+      firstName,
+      lastName,
+      age,
+    });
+
+    return res.send({ user, isAuth: true });
+  } catch (e) {
+    return res.send({ error: e.message });
   }
-
-  return res.send({ username, password, isAuth });
 });
 
 const startServer = async () => {
   try {
     await sequelize.authenticate();
+    await sequelize.sync();
     app.listen(port, () => {
       console.log(`Example app listening on port ${port}`);
     });
