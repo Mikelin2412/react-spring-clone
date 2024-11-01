@@ -1,12 +1,14 @@
+require('dotenv').config();
 const express = require('express');
+const sequelize = require('./db');
 const cors = require('cors');
 const { KEYS, ProjectsInfo } = require('./mock-data');
 const app = express();
-const port = 3000;
+const port = process.env.SERVER_PORT || 3000;
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.CLIENT_HOST,
     methods: ['GET', 'POST'],
     preflightContinue: false,
     optionsSuccessStatus: 204,
@@ -40,6 +42,17 @@ app.post('/login', (req, res) => {
   return res.send({ username, password, isAuth });
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+const startServer = async () => {
+  try {
+    await sequelize.authenticate();
+    app.listen(port, () => {
+      console.log(`Example app listening on port ${port}`);
+    });
+  } catch (e) {
+    console.log(
+      `There is an error occurred while connecting to the database: ` + e,
+    );
+  }
+};
+
+startServer();
