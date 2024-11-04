@@ -8,9 +8,10 @@ const {
   lastNameValidation,
   ageValidation,
 } = require('../utils/validations.js');
+const authMiddleware = require('../middleware/authMiddleware.js');
 const router = new Router();
 
-router.get('/getProjects', ProjectService.getProjects);
+router.get('/getProjects', authMiddleware, ProjectService.getProjects);
 router.post(
   '/signUp',
   usernameValidation(),
@@ -21,5 +22,6 @@ router.post(
   UserService.signUp,
 );
 router.post('/login', UserService.login);
+router.get('/refresh', UserService.refresh);
 
 module.exports = router;

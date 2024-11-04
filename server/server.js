@@ -4,6 +4,7 @@ const sequelize = require('./db');
 const cors = require('cors');
 const router = require('./routes/routes.js');
 const app = express();
+const cookieParser = require('cookie-parser');
 const port = process.env.SERVER_PORT || 3000;
 
 app.use(
@@ -14,6 +15,7 @@ app.use(
     optionsSuccessStatus: 204,
   }),
 );
+app.use(cookieParser());
 app.use(express.json());
 app.use('/api', router);
 

@@ -59,7 +59,7 @@ class UserService {
       });
       if (!user) {
         const error = new Error('User is not found!');
-        error.status = 404;
+        error.status = 400;
         throw error;
       }
 
@@ -70,7 +70,48 @@ class UserService {
         throw error;
       }
 
-      return res.send({ user });
+      const userDTO = new UserDTO(user);
+      const tokens = tokenService.generateTokens({ ...userDTO });
+      tokenService.saveRefreshToken(userDTO.id, tokens.refreshToken);
+
+      res.cookie('refreshToken', tokens.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
+      return res.json({ ...tokens, user: userDTO });
+    } catch (e) {
+      return res.status(e.status).send({ message: e.message });
+    }
+  }
+
+  async refresh(req, res) {
+    try {
+      const { refreshToken } = req.cookies;
+
+      if (!refreshToken) {
+        const error = new Error('You are unauthorized!');
+        error.status = 401;
+        throw error;
+      }
+
+      const userData = tokenService.validateRefreshToken(refreshToken);
+      const savedToken = tokenService.findRefreshToken(refreshToken);
+      if (!userData || !savedToken) {
+        const error = new Error('You are unauthorized!');
+        error.status = 401;
+        throw error;
+      }
+
+      const user = await User.findByPk(userData.id);
+      const userDTO = new UserDTO(user);
+      const tokens = tokenService.generateTokens({ ...userDTO });
+      tokenService.saveRefreshToken(userDTO.id, tokens.refreshToken);
+
+      res.cookie('refreshToken', tokens.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
+      return res.json({ ...tokens, user: userDTO });
     } catch (e) {
       return res.status(e.status).send({ message: e.message });
     }
