@@ -12,7 +12,9 @@ const SignUpForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [age, setAge] = useState(1);
-  const { isAuth } = useSelector((state) => state.authorization);
+  const { isAuth, validationErrors, errorMessage } = useSelector(
+    (state) => state.authorization,
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -39,6 +41,13 @@ const SignUpForm = () => {
         placeholder="Your username"
         onChange={(e) => setUsername(e.target.value)}
       />
+      {validationErrors?.username
+        ? validationErrors.username.map((error) => (
+            <span className={styles.warningMessage} key={error}>
+              {error}
+            </span>
+          ))
+        : null}
       <label className={styles.labelText}>Password:</label>
       <input
         className={styles.input}
@@ -46,6 +55,13 @@ const SignUpForm = () => {
         placeholder="Your password"
         onChange={(e) => setPassword(e.target.value)}
       />
+      {validationErrors?.password
+        ? validationErrors.password.map((error) => (
+            <span className={styles.warningMessage} key={error}>
+              {error}
+            </span>
+          ))
+        : null}
       <label className={styles.labelText}>Repeat password:</label>
       <input
         className={styles.input}
@@ -53,6 +69,13 @@ const SignUpForm = () => {
         placeholder="Repeat your password"
         onChange={(e) => setRepeatPassword(e.target.value)}
       />
+      {validationErrors?.repeatPassword
+        ? validationErrors.repeatPassword.map((error) => (
+            <span className={styles.warningMessage} key={error}>
+              {error}
+            </span>
+          ))
+        : null}
       <label className={styles.labelText}>First name:</label>
       <input
         className={styles.input}
@@ -60,6 +83,13 @@ const SignUpForm = () => {
         placeholder="Your first name"
         onChange={(e) => setFirstName(e.target.value)}
       />
+      {validationErrors?.firstName
+        ? validationErrors.firstName.map((error) => (
+            <span className={styles.warningMessage} key={error}>
+              {error}
+            </span>
+          ))
+        : null}
       <label className={styles.labelText}>Last name:</label>
       <input
         className={styles.input}
@@ -67,6 +97,13 @@ const SignUpForm = () => {
         placeholder="Your last name"
         onChange={(e) => setLastName(e.target.value)}
       />
+      {validationErrors?.lastName
+        ? validationErrors.lastName.map((error) => (
+            <span className={styles.warningMessage} key={error}>
+              {error}
+            </span>
+          ))
+        : null}
       <label className={styles.labelText}>Age:</label>
       <input
         className={styles.input}
@@ -75,6 +112,16 @@ const SignUpForm = () => {
         min={1}
         onChange={(e) => setAge(e.target.value)}
       />
+      {validationErrors?.age
+        ? validationErrors.age.map((error) => (
+            <span className={styles.warningMessage} key={error}>
+              {error}
+            </span>
+          ))
+        : null}
+      {errorMessage ? (
+        <span className={styles.warningMessage}>{errorMessage}</span>
+      ) : null}
       <button className={styles.button} type="submit" onClick={handleClick}>
         Sign Up
       </button>

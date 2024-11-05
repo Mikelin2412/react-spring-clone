@@ -39,7 +39,7 @@ export const checkAuth = () => {
       .get(`${API_URL}/refresh`, { withCredentials: true })
       .then((res) => dispatch(checkUserAuthorization(res.data)))
       .catch((err) => {
-        dispatch(errorMessage(err.response.data));
+        console.log(err.response.data);
       });
   };
 };

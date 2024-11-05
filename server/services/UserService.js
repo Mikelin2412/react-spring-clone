@@ -42,7 +42,11 @@ class UserService {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      return res.json({ accessToken: tokens.accessToken, user: userDTO, isAuth: true });
+      return res.json({
+        accessToken: tokens.accessToken,
+        user: userDTO,
+        isAuth: true,
+      });
     } catch (e) {
       return res.send({ errorMessage: e.message });
     }
@@ -50,6 +54,11 @@ class UserService {
 
   async login(req, res) {
     try {
+      const result = validationResult(req);
+      if (!result.isEmpty()) {
+        return res.send({ errors: result.array() });
+      }
+
       const { username, password } = req.body;
 
       const user = await User.findOne({

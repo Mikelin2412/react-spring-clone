@@ -8,7 +8,9 @@ import { HOME_ROUTE, SIGN_UP_ROUTE } from '../../routes/routes';
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { isAuth, errorMessage } = useSelector((state) => state.authorization);
+  const { isAuth, validationErrors, errorMessage } = useSelector(
+    (state) => state.authorization,
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -33,6 +35,13 @@ const LoginForm = () => {
         placeholder="Your username"
         onChange={(e) => setUsername(e.target.value)}
       />
+      {validationErrors?.username
+        ? validationErrors.username.map((error) => (
+            <span className={styles.warningMessage} key={error}>
+              {error}
+            </span>
+          ))
+        : null}
       <label className={styles.labelText}>Password:</label>
       <input
         className={styles.input}
@@ -40,11 +49,21 @@ const LoginForm = () => {
         placeholder="Your password"
         onChange={(e) => setPassword(e.target.value)}
       />
+      {validationErrors?.password
+        ? validationErrors.password.map((error) => (
+            <span className={styles.warningMessage} key={error}>
+              {error}
+            </span>
+          ))
+        : null}
+      {errorMessage ? (
+        <span className={styles.warningMessage}>{errorMessage}</span>
+      ) : null}
       <button className={styles.button} type="submit" onClick={handleClick}>
         Login
       </button>
       <Link className={styles.redirectToSignIn} to={SIGN_UP_ROUTE}>
-        <span>Don't have an account?</span>
+        <span>Don&apos;t have an account?</span>
       </Link>
     </form>
   );

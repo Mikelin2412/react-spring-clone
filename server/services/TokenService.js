@@ -29,17 +29,19 @@ class TokenService {
   validateAccessToken(token) {
     try {
       return jwt.verify(token, process.env.JWT_ACCESS_KEY);
+      // eslint-disable-next-line no-unused-vars
     } catch (e) {
       return null;
     }
   }
 
   validateRefreshToken(token) {
-     try {
-       return jwt.verify(token, process.env.JWT_REFRESH_KEY);
-     } catch (e) {
-       return null;
-     }
+    try {
+      return jwt.verify(token, process.env.JWT_REFRESH_KEY);
+      // eslint-disable-next-line no-unused-vars
+    } catch (e) {
+      return null;
+    }
   }
 
   findRefreshToken(token) {
