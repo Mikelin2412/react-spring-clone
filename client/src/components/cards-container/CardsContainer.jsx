@@ -21,9 +21,9 @@ const CardsContainer = ({ searchInputValue }) => {
           <Card
             key={cardInfo.title}
             title={cardInfo.title}
-            imageSrc={cardInfo.imageSrc}
+            imageSrc={cardInfo.image}
             description={cardInfo.description}
-            cardUrl={cardInfo.cardUrl}
+            cardUrl={cardInfo.card}
           />
         ))
       )}

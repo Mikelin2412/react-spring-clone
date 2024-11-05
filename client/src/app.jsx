@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import Header from './components/header/Header';
-import { Outlet } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import AppRouter from './routes/AppRouter.jsx';
 import { useDispatch } from 'react-redux';
 import { checkAuth } from './store/auth/authActions.js';
 
-const Layout = () => {
+const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,10 +15,11 @@ const Layout = () => {
 
   return (
     <>
-      <Header />
-      <Outlet />
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
     </>
   );
 };
 
-export default Layout;
+export default App;

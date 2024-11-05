@@ -20,6 +20,14 @@ const passwordValidation = () => {
     .withMessage('Password must contain at least 1 number and 1 letter');
 };
 
+const repeatPasswordValidation = () => {
+  return body('repeatPassword')
+    .custom((value, { req }) => {
+      return value === req.body.password;
+    })
+    .withMessage("Passwords don't match");
+};
+
 const firstNameValidation = () => {
   return body('firstName')
     .trim()
@@ -55,6 +63,7 @@ const ageValidation = () => {
 module.exports = {
   usernameValidation,
   passwordValidation,
+  repeatPasswordValidation,
   firstNameValidation,
   lastNameValidation,
   ageValidation,

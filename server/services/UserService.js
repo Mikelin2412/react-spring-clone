@@ -42,9 +42,9 @@ class UserService {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      return res.json({ ...tokens, user: userDTO });
+      return res.json({ accessToken: tokens.accessToken, user: userDTO, isAuth: true });
     } catch (e) {
-      return res.send({ error: e.message });
+      return res.send({ errorMessage: e.message });
     }
   }
 
@@ -78,9 +78,13 @@ class UserService {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      return res.json({ ...tokens, user: userDTO });
+      return res.json({
+        accessToken: tokens.accessToken,
+        user: userDTO,
+        isAuth: true,
+      });
     } catch (e) {
-      return res.status(e.status).send({ message: e.message });
+      return res.status(e.status).send({ errorMessage: e.message });
     }
   }
 
@@ -111,9 +115,13 @@ class UserService {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      return res.json({ ...tokens, user: userDTO });
+      return res.json({
+        accessToken: tokens.accessToken,
+        user: userDTO,
+        isAuth: true,
+      });
     } catch (e) {
-      return res.status(e.status).send({ message: e.message });
+      return res.status(e.status).send({ errorMessage: e.message });
     }
   }
 }

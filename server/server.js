@@ -13,6 +13,7 @@ app.use(
     methods: ['GET', 'POST'],
     preflightContinue: false,
     optionsSuccessStatus: 204,
+    credentials: true,
   }),
 );
 app.use(cookieParser());

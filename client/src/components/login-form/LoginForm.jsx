@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './loginForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { authUser } from '../../store/auth/authActions';
-import { useNavigate } from 'react-router-dom';
-import { HOME_ROUTE } from '../../routes/routes';
+import { Link, useNavigate } from 'react-router-dom';
+import { HOME_ROUTE, SIGN_UP_ROUTE } from '../../routes/routes';
 
-const Form = () => {
+const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { isAuth, message } = useSelector((state) => state.authorization);
+  const { isAuth, errorMessage } = useSelector((state) => state.authorization);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -43,11 +43,11 @@ const Form = () => {
       <button className={styles.button} type="submit" onClick={handleClick}>
         Login
       </button>
-      {message ? (
-        <span className={styles.warningMessage}>{message}</span>
-      ) : null}
+      <Link className={styles.redirectToSignIn} to={SIGN_UP_ROUTE}>
+        <span>Don't have an account?</span>
+      </Link>
     </form>
   );
 };
 
-export default Form;
+export default LoginForm;

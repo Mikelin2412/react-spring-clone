@@ -7,6 +7,7 @@ const {
   firstNameValidation,
   lastNameValidation,
   ageValidation,
+  repeatPasswordValidation,
 } = require('../utils/validations.js');
 const authMiddleware = require('../middleware/authMiddleware.js');
 const router = new Router();
@@ -16,12 +17,18 @@ router.post(
   '/signUp',
   usernameValidation(),
   passwordValidation(),
+  repeatPasswordValidation(),
   firstNameValidation(),
   lastNameValidation(),
   ageValidation(),
   UserService.signUp,
 );
-router.post('/login', UserService.login);
+router.post(
+  '/login',
+  usernameValidation(),
+  passwordValidation(),
+  UserService.login,
+);
 router.get('/refresh', UserService.refresh);
 
 module.exports = router;

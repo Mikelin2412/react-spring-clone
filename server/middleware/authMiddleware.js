@@ -26,6 +26,6 @@ module.exports = function (req, res, next) {
     req.user = userData;
     next();
   } catch (e) {
-    return res.status(e.status).json({ message: e.message });
+    return res.status(e.status).json({ errorMessage: e.message });
   }
 };

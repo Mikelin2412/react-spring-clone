@@ -16,7 +16,7 @@ class ProjectService {
 
       return res.send(suitableProjects);
     } catch (e) {
-      return res.send({ error: e.message });
+      return res.send({ errorMessage: e.message });
     }
   }
 }
