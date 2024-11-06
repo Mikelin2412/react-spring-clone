@@ -48,7 +48,7 @@ class UserService {
         isAuth: true,
       });
     } catch (e) {
-      return res.send({ errorMessage: e.message });
+      return res.status(e.status).send({ errorMessage: e.message });
     }
   }
 
@@ -75,7 +75,7 @@ class UserService {
       const isPasswordCorrect = bcrypt.compareSync(password, user.password);
       if (!isPasswordCorrect) {
         const error = new Error('Password is incorrect!');
-        error.status = 401;
+        error.status = 400;
         throw error;
       }
 

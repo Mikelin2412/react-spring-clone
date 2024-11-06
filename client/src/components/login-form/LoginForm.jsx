@@ -63,7 +63,7 @@ const LoginForm = () => {
         Login
       </button>
       <Link className={styles.redirectToSignIn} to={SIGN_UP_ROUTE}>
-        <span>Don&apos;t have an account?</span>
+        <span>Don&apos;t have an account? Sign Up</span>
       </Link>
     </form>
   );

@@ -126,7 +126,7 @@ const SignUpForm = () => {
         Sign Up
       </button>
       <Link className={styles.redirectToLogin} to={LOGIN_ROUTE}>
-        <span>Have an account?</span>
+        <span>Have an account? Sign In</span>
       </Link>
     </form>
   );
