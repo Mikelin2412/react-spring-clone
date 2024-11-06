@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { getProjectsBySearch } from '../../http/api';
 
 const setProjectsBySearch = (projects) => ({
   type: 'SET_PROJECTS',
@@ -7,10 +7,7 @@ const setProjectsBySearch = (projects) => ({
 
 export const getProjects = (search) => {
   return async (dispatch) => {
-    await axios
-      .get(`http://localhost:3000/getProjects`, {
-        params: { search },
-      })
+    await getProjectsBySearch(search)
       .then((res) => {
         dispatch(setProjectsBySearch(res.data));
       })

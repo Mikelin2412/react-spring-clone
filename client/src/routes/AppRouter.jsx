@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, Route, Routes } from 'react-router-dom';
-import { AUTH_ROUTES, LOGIN_ROUTE, PUBLIC_ROUTES } from './routes';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { AUTH_ROUTES, PUBLIC_ROUTES, LOGIN_ROUTE } from './routes';
 import Layout from '../layout';
 
 const AppRouter = () => {

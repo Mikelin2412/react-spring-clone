@@ -1,45 +1,37 @@
+require('dotenv').config();
 const express = require('express');
+const sequelize = require('./db');
 const cors = require('cors');
-const { KEYS, ProjectsInfo } = require('./mock-data');
+const router = require('./routes/routes.js');
 const app = express();
-const port = 3000;
+const cookieParser = require('cookie-parser');
+const port = process.env.SERVER_PORT || 3000;
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.CLIENT_HOST,
     methods: ['GET', 'POST'],
     preflightContinue: false,
     optionsSuccessStatus: 204,
+    credentials: true,
   }),
 );
+app.use(cookieParser());
 app.use(express.json());
+app.use('/api', router);
 
-app.get('/getProjects', (req, res) => {
-  const { search } = req.query;
-
-  if (!search) {
-    return res.send(ProjectsInfo);
+const startServer = async () => {
+  try {
+    await sequelize.authenticate();
+    await sequelize.sync();
+    app.listen(port, () => {
+      console.log(`Example app listening on port ${port}`);
+    });
+  } catch (e) {
+    console.log(
+      `There is an error occurred while connecting to the database: ` + e,
+    );
   }
+};
 
-  const suitableProjects = ProjectsInfo.filter((project) =>
-    project.title.toLowerCase().includes(search.toLowerCase()),
-  );
-
-  return res.send(suitableProjects);
-});
-
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  let isAuth =
-    username === KEYS.username && password === KEYS.password ? true : false;
-
-  if (!isAuth) {
-    return res.status(401).json({ message: "You don't have access!" });
-  }
-
-  return res.send({ username, password, isAuth });
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+startServer();
